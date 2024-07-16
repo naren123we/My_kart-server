@@ -44,10 +44,10 @@ exports.signup = async (req, res) => {
     let token = jwt.sign(paylod, process.env.JWT_SCERET, { expiresIn: "2h" });
 
     const options = {
-      expires: new Date(Date.now() +  2* 60 * 60 * 1000),
+      expires: new Date(Date.now() + 2 * 60 * 60 * 1000),
       httpOnly: true,
     };
-    
+
     user.token = token;
     user.password = undefined;
 
@@ -55,6 +55,7 @@ exports.signup = async (req, res) => {
       success: true,
       token,
       user,
+      options,
       message: "user created successfuly",
     });
   } catch (err) {
@@ -104,7 +105,7 @@ exports.login = async (req, res) => {
       user.password = undefined;
 
       const options = {
-        expires: new Date(Date.now() + 2*60*60*1000),
+        expires: new Date(Date.now() + 2 * 60 * 60 * 1000),
         httpOnly: true,
       };
 
